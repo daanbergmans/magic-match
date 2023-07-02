@@ -12,7 +12,6 @@ const cardImages = [
 ];
 
 const Game = () => {
-
 	const [cards, setCards] = useState([]);
 	const [turns, setTurns] = useState(0);
 	const [choiceOne, setChoiceOne] = useState(null);
@@ -22,7 +21,7 @@ const Game = () => {
 	const shuffleCards = () => {
 		const shuffledCards = [...cardImages, ...cardImages]
 			.sort(() => Math.random() - 0.5)
-			.map((card) => ({...card, id: Math.random()}));
+			.map((card) => ({ ...card, id: Math.random() }));
 
 		setChoiceOne(null);
 		setChoiceTwo(null);
@@ -44,7 +43,7 @@ const Game = () => {
 			setCards((prevCards) => {
 				return prevCards.map((card) => {
 					if (card.src !== choiceOne.src) return card;
-					return {...card, matched: true};
+					return { ...card, matched: true };
 				})
 			})
 			resetTurn();
@@ -72,17 +71,17 @@ const Game = () => {
 			<div className='card-grid'>
 				{
 					cards.map((card) => (
-						<Card 
-							key={card.id} 
-							card={card} 
-							flipped={card === choiceOne || card === choiceTwo || card.matched} 
-							handleChoice={handleChoice} 
+						<Card
+							key={card.id}
+							card={card}
+							flipped={card === choiceOne || card === choiceTwo || card.matched}
+							handleChoice={handleChoice}
 							disabled={disabled}
 						/>
 					))
 				}
 			</div>
-			<p>Turn: { turns }</p>
+			<p>Turn: {turns}</p>
 		</div>
 	)
 }
